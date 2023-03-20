@@ -30,3 +30,4 @@ build
 
 # Ignore .idea directory
 .idea
+/.gitattributes
