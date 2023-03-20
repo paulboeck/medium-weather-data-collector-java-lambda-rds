@@ -9,6 +9,8 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
+    id "org.springframework.boot" version "2.7.4"
+    id 'io.spring.dependency-management' version '1.1.0'
 }
 
 repositories {
@@ -17,19 +19,27 @@ repositories {
 }
 
 dependencies {
-    // Use JUnit Jupiter API for testing.
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.2'
+    // AWS dependencies
+    implementation 'software.amazon.awssdk:secretsmanager:2.17.261'
+    implementation 'com.amazonaws:aws-lambda-java-core:1.1.0'
 
-    // Use JUnit Jupiter Engine for testing.
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    // Spring dependencies
+    implementation 'org.springframework.boot:spring-boot-starter'
+
+    // Unit testing.
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     // This dependency is used by the application.
-    implementation 'com.google.guava:guava:31.1-jre'
+    //implementation 'com.google.guava:guava:31.1-jre'
 }
 
 application {
     // Define the main class for the application.
     mainClass = 'org.weather-tracker.App'
+}
+
+test {
+    testLogging.showStandardStreams = true
 }
 
 tasks.named('test') {
