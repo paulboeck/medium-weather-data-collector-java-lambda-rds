@@ -1,4 +1,4 @@
-name: SAM Destroy
+name: SAM Delete
 on:
   workflow_dispatch:
 jobs:
