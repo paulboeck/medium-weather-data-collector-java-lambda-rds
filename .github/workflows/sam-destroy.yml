@@ -1,8 +1,6 @@
-name: SAM Validate
+name: SAM Destroy
 on:
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
@@ -24,5 +22,16 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
-      - name: Run SAM Validate
-        run: sam validate -t sam.template.yaml --lint
+      - name: Run SAM Build
+        run: sam build -t sam.template.yaml
+
+      - name: Run SAM Destroy
+        run: |
+          sam destroy \
+            --template-file .aws-sam/build/template.yaml \
+            --no-confirm-changeset  \
+            --no-fail-on-empty-changeset  \
+            --stack-name weather-tracker-java-rds-lambda  \
+            --s3-bucket ${{ secrets.AWS_S3_BUCKET }}  \
+            --capabilities CAPABILITY_IAM  CAPABILITY_NAMED_IAM \
+            --region ${{ secrets.AWS_REGION }}
