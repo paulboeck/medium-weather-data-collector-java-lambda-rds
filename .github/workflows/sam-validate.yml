@@ -1,8 +1,5 @@
 name: SAM Validate
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
