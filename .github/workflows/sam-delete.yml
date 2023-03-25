@@ -25,4 +25,4 @@ jobs:
       - name: Run SAM Build
         run: sam build -t sam.template.yaml
       - name: Run SAM Delete
-        run: sam delete --stack-name weather-tracker-java-rds-lambda --no-prompts
+        run: sam delete --stack-name weather-tracker-java-rds-lambda --no-prompts --region ${{ secrets.AWS_REGION }}
