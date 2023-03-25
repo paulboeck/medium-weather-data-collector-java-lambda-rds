@@ -8,7 +8,7 @@
 
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
-    id 'application'
+    id 'java'
     id "org.springframework.boot" version "2.7.4"
     id 'io.spring.dependency-management' version '1.1.0'
 }
@@ -31,11 +31,6 @@ dependencies {
 
     // This dependency is used by the application.
     //implementation 'com.google.guava:guava:31.1-jre'
-}
-
-application {
-    // Define the main class for the application.
-    mainClass = 'org.weather-tracker.App'
 }
 
 test {

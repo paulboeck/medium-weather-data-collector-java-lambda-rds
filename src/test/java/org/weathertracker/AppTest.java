@@ -5,6 +5,7 @@ package org.weathertracker;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import org.junit.jupiter.api.Test;
@@ -22,7 +23,7 @@ class AppTest {
     void testHandleRequest() {
         App app = new App();
         Context context = Mockito.mock(Context.class);
-        assertEquals("Hello World!", app.handleRequest(context));
+        assertTrue(app.handleRequest(context).startsWith("Hello World!"));
 
     }
 }

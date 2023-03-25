@@ -1,0 +1,26 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: Weather Tracker Java/RDS Lambda Functions
+Resources:
+  WeatherTrackerJavaRDSFunction:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      FunctionName: weather-tracker-java-rds-lambda
+      Handler: org.weathertracker.App::handleRequest
+      Runtime: java8
+      Description: Weather Tracker Java RDS Lambda Function
+      MemorySize: 1024
+      Timeout: 240
+      PackageType: Zip
+      CodeUri: '.'
+      Events:
+        InvocationLevel:
+          Type: Schedule
+          Properties:
+            Schedule: cron(0 0 * * ? *)
+  WeatherTrackerJavaRDSLambdaLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${WeatherTrackerJavaRDSFunction}"
+      # Explicit retention time
+      RetentionInDays: 7
