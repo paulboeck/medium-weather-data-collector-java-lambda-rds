@@ -6,6 +6,7 @@ on:
     paths:
       - 'sam.template.yaml'
       - 'src/main/**'
+      - 'build.gradle'
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
