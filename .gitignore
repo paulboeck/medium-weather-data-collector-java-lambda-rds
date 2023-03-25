@@ -31,3 +31,7 @@ build
 # Ignore .idea directory
 .idea
 /.gitattributes
+
+# Ignore aws-sam
+.aws-sam
+/samconfig.toml
