@@ -24,14 +24,5 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
       - name: Run SAM Build
         run: sam build -t sam.template.yaml
-
-      - name: Run SAM Destroy
-        run: |
-          sam destroy \
-            --template-file .aws-sam/build/template.yaml \
-            --no-confirm-changeset  \
-            --no-fail-on-empty-changeset  \
-            --stack-name weather-tracker-java-rds-lambda  \
-            --s3-bucket ${{ secrets.AWS_S3_BUCKET }}  \
-            --capabilities CAPABILITY_IAM  CAPABILITY_NAMED_IAM \
-            --region ${{ secrets.AWS_REGION }}
+      - name: Run SAM Delete
+        run: sam delete
