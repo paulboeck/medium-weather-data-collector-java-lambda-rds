@@ -14,7 +14,7 @@ public class App {
     }
 
     public String getGreeting() {
-        return "Hello World!";
+        return "Hello World! I was deployed by a GitHub Action!!";
     }
 
     /**

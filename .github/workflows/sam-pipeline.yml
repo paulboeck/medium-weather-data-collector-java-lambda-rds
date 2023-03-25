@@ -3,10 +3,6 @@ on:
   push:
     branches:
       - main
-  # Temporarily build on PR while we're debugging GHA
-  pull_request:
-    branches:
-      - main
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
