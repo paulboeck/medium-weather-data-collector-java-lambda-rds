@@ -35,3 +35,9 @@ build
 # Ignore aws-sam
 .aws-sam
 /samconfig.toml
+
+# Ignore terraform
+/terraform/.terraform
+/terraform/terraform.tfstate.backup
+/terraform/terraform.tfstate
+/terraform/.terraform.lock.hcl
