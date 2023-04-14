@@ -2,6 +2,15 @@ name: Terraform Apply
 
 on:
   workflow_dispatch:
+    inputs:
+      password:
+        description: 'DB Password'
+        required: true
+        type: string
+      username:
+        description: 'DB Username'
+        required: true
+        type: string
 
 jobs:
   plan:
@@ -32,7 +41,7 @@ jobs:
       # Terraform Plan
       - name: Terraform plan
         id: plan
-        run: terraform plan -out=./plan.out
+        run: terraform plan -out=./plan.out -var="db_password=${{ inputs.password }}" -var="db_username=${{ inputs.username }}"
         working-directory: ./terraform
 
       # Publish artifact
