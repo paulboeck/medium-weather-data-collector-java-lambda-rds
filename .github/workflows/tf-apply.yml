@@ -84,5 +84,5 @@ jobs:
       # Terraform Apply
       - name: Terraform apply
         id: apply
-        run: terraform apply -auto-approve -var="db-password=${{ inputs.password }}" -var="db-username=${{ inputs.username }}" tfplan
+        run: terraform apply -auto-approve tfplan
         working-directory: ./terraform
