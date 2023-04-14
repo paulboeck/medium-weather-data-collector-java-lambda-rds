@@ -41,7 +41,7 @@ jobs:
       # Terraform Plan
       - name: Terraform plan
         id: plan
-        run: terraform plan -out=./plan.out -var="db_password=${{ inputs.password }}" -var="db_username=${{ inputs.username }}"
+        run: terraform plan -out=./plan.out -var="db-password=${{ inputs.password }}" -var="db-username=${{ inputs.username }}"
         working-directory: ./terraform
 
       # Publish artifact
