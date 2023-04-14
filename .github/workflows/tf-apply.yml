@@ -41,7 +41,7 @@ jobs:
       # Terraform Plan
       - name: Terraform plan
         id: plan
-        run: terraform plan -out=./plan.out -var="db-password=${{ inputs.password }}" -var="db-username=${{ inputs.username }}"
+        run: terraform plan -out=tfplan -var="db-password=${{ inputs.password }}" -var="db-username=${{ inputs.username }}"
         working-directory: ./terraform
 
       # Publish artifact
@@ -49,18 +49,20 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: published-plan
-          path: './terraform/plan.out'
+          path: './terraform/tfplan'
 
   apply:
     environment: DEV
     runs-on: ubuntu-latest
     needs: plan
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Download artifact
         uses: actions/download-artifact@v2
         with:
           name: published-plan
-          path: './terraform/plan.out'
+          path: './terraform/tfplan'
       - name: Set up AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -80,5 +82,5 @@ jobs:
       # Terraform Apply
       - name: Terraform apply
         id: apply
-        run: terraform apply -auto-approve ./plan.out
+        run: terraform apply -auto-approve -var="db-password=${{ inputs.password }}" -var="db-username=${{ inputs.username }}" tfplan
         working-directory: ./terraform
