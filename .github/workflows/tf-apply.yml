@@ -1,4 +1,4 @@
-name: Run Terraform Apply
+name: Terraform Apply
 
 on:
   workflow_dispatch:
@@ -27,11 +27,13 @@ jobs:
       # Initialize Terraform
       - name: Terraform init
         run: terraform init
+        working-directory: ./terraform
 
       # Terraform Plan
       - name: Terraform plan
         id: plan
         run: terraform plan -out=./plan.out
+        working-directory: ./terraform
 
       # Publish artifact
       - name: Publish artifact
@@ -64,8 +66,10 @@ jobs:
       # Initialize Terraform
       - name: Terraform init
         run: terraform init
+        working-directory: ./terraform
 
       # Terraform Apply
       - name: Terraform apply
         id: apply
         run: terraform apply -auto-approve ./plan.out
+        working-directory: ./terraform
