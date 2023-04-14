@@ -49,7 +49,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: published-plan
-          path: './plan.out'
+          path: './terraform/plan.out'
 
   apply:
     environment: DEV
@@ -60,7 +60,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: published-plan
-          path: './'
+          path: './terraform/plan.out'
       - name: Set up AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
