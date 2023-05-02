@@ -8,9 +8,18 @@
 
 plugins {
     id 'java'
-    id "org.springframework.boot" version "2.7.4"
+    id 'org.springframework.boot' version '3.0.6'
     id 'io.spring.dependency-management' version '1.1.0'
 }
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+group = 'org.weathertracker'
+version = '0.0.1-SNAPSHOT'
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -32,9 +41,9 @@ dependencies {
     //implementation 'com.google.guava:guava:31.1-jre'
 }
 
-test {
-    testLogging.showStandardStreams = true
-}
+//test {
+    //testLogging.showStandardStreams = true
+//}
 
 tasks.named('test') {
     // Use junit platform for unit tests.

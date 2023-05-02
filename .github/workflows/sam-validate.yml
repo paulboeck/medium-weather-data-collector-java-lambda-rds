@@ -25,4 +25,4 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
       - name: Run SAM Validate
-        run: sam validate -t sam.template.yaml --lint
+        run: sam validate

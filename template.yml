@@ -6,8 +6,8 @@ Resources:
     Type: 'AWS::Serverless::Function'
     Properties:
       FunctionName: weather-tracker-java-rds-lambda
-      Handler: org.weathertracker.App::handleRequest
-      Runtime: java8
+      Handler: org.weathertracker.Handler::handleRequest
+      Runtime: java17
       Description: Weather Tracker Java RDS Lambda Function
       MemorySize: 1024
       Timeout: 240
