@@ -10,6 +10,6 @@ configured as a Spring Boot application and will also leverage Spring Data JPA
 and Spring Web. Given that this Lambda function only runs once per day and that it does not
 need to be performant at all (i.e. there is no user waiting on a response from 
 this Lambda function), we are not concerned with the long cold-start time caused by using so many Spring
-libraries. The Spring Boot application will be configured to run the Liquibase
+libraries. Eventually, the Spring Boot application will be configured to run the Liquibase
 database migration tool upon startup to ensure that the database schema version
 is compatible with the version of the Lambda function itself.

@@ -32,10 +32,6 @@ build
 .idea
 /.gitattributes
 
-# Ignore aws-sam
-.aws-sam
-/samconfig.toml
-
 # Ignore terraform
 /terraform/.terraform
 /terraform/terraform.tfstate.backup
