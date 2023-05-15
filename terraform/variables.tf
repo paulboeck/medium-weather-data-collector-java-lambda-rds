@@ -4,3 +4,9 @@ variable "db-username" {
 variable "db-password" {
   type = string
 }
+variable "project" {
+  type = string
+}
+variable "lambda-version" {
+  type = string
+}
