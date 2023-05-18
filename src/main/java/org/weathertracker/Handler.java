@@ -13,12 +13,18 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 
 public class Handler {
+    private static Logger LOG = LoggerFactory.getLogger(Handler.class);
     private static ConfigurableApplicationContext applicationContext;
     private static Config config;
 
     static {
-        applicationContext = SpringApplication.run(SpringAppForLambda.class);
-        config = applicationContext.getBean(Config.class);
+        LOG.debug("Initializing Spring Boot application");
+        try {
+            applicationContext = SpringApplication.run(SpringAppForLambda.class);
+            config = applicationContext.getBean(Config.class);
+        } catch (Exception e) {
+            LOG.error("Error initializing Spring Boot application", e);
+        }
     }
 
     /**

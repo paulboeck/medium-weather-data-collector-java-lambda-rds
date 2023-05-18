@@ -41,6 +41,14 @@ dependencies {
     //implementation 'com.google.guava:guava:31.1-jre'
 }
 
+task buildZip(type: Zip) {
+    from compileJava
+    from processResources
+    into('lib') {
+        from configurations.runtimeClasspath
+    }
+}
+
 //test {
     //testLogging.showStandardStreams = true
 //}
