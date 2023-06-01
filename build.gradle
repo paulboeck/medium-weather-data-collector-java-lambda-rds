@@ -53,9 +53,9 @@ task buildZip(type: Zip) {
     }
 }
 
-//test {
-    //testLogging.showStandardStreams = true
-//}
+test {
+    testLogging.showStandardStreams = true
+}
 
 tasks.named('test') {
     // Use junit platform for unit tests.

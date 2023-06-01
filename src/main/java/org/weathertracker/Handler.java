@@ -37,6 +37,7 @@ public class Handler {
             controller.getWeather();
         } catch (Exception e) {
             LOG.error("Error getting weather", e);
+            return "error";
         }
         LOG.info("Ending handleRequest()");
         return "ok";
