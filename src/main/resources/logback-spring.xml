@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <include resource="org/springframework/boot/logging/logback/base.xml"/>
+  <appender name="jsonConsoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+      <providers>
+        <pattern>
+          <pattern>
+            {
+            "level": "%level",
+            "message": "%msg",
+            "logger": "%logger",
+            "awsRequestId": "%X{awsRequestId}",
+            "stacktrace": "%ex"
+            }
+          </pattern>
+        </pattern>
+      </providers>
+    </encoder>
+  </appender>
+
+  <!-- Disable the default pattern layout -->
+  <root level="WARN">
+    <appender-ref ref="jsonConsoleAppender"/>
+  </root>
+
+  <!-- Additivity is set to false to prevent duplication of logs in the parent appenders -->
+  <logger name="org" level="INFO" additivity="false">
+    <appender-ref ref="jsonConsoleAppender"/>
+  </logger>
+</configuration>
+

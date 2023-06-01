@@ -6,22 +6,19 @@ package org.weathertracker;
 import com.amazonaws.services.lambda.runtime.Context;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
+import org.slf4j.MDC;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.stereotype.Component;
+import org.weathertracker.controller.WeatherApiController;
 
 public class Handler {
-    private static Logger LOG = LoggerFactory.getLogger(Handler.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Handler.class);
     private static ConfigurableApplicationContext applicationContext;
-    private static Config config;
 
     static {
         LOG.debug("Initializing Spring Boot application");
         try {
             applicationContext = SpringApplication.run(SpringAppForLambda.class);
-            config = applicationContext.getBean(Config.class);
         } catch (Exception e) {
             LOG.error("Error initializing Spring Boot application", e);
         }
@@ -33,10 +30,29 @@ public class Handler {
      * @return a string containing a message
      */
     public String handleRequest(Context context) {
-        return Handler.config.getApplicationName();
+        MDC.put("awsRequestId", context.getAwsRequestId());
+        LOG.info("Starting handleRequest()");
+        WeatherApiController controller = applicationContext.getBean(WeatherApiController.class);
+        try {
+            controller.getWeather();
+        } catch (Exception e) {
+            LOG.error("Error getting weather", e);
+        }
+        LOG.info("Ending handleRequest()");
+        return "ok";
     }
 
     public static void main(String[] args) {
-        System.out.println("Main Method");
+        MDC.put("awsRequestId", "local:" + Thread.currentThread().getId());
+        WeatherApiController controller = applicationContext.getBean(WeatherApiController.class);
+        LOG.info("Starting main()");
+        try {
+            controller.getWeather();
+        } catch (Exception e) {
+            LOG.error("Error getting weather", e);
+        }
+
+        applicationContext.stop();
+        LOG.info("Ending main()");
     }
 }
