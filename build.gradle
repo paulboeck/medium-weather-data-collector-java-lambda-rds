@@ -33,6 +33,10 @@ dependencies {
 
     // Spring dependencies
     implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-json'
+
+    // Logging dependencies - for logging JSON
+    implementation 'net.logstash.logback:logstash-logback-encoder:7.3'
 
     // Unit testing.
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -49,9 +53,9 @@ task buildZip(type: Zip) {
     }
 }
 
-//test {
-    //testLogging.showStandardStreams = true
-//}
+test {
+    testLogging.showStandardStreams = true
+}
 
 tasks.named('test') {
     // Use junit platform for unit tests.
